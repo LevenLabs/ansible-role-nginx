@@ -28,3 +28,15 @@
   when: item[:-5] not in nginx_configs.keys()
   notify:
     - reload nginx
+
+- name: Find extra files
+  shell: ls -1 {{nginx_conf_dir}}/extra
+  register: extra_files
+  changed_when: False
+
+- name: Remove unmanaged extra files
+  file: name={{nginx_conf_dir}}/extra/{{item}} state=absent
+  with_items: extra_files.stdout_lines
+  when: item not in nginx_extra_files.keys()
+  notify:
+   - reload nginx
