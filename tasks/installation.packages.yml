@@ -1,20 +1,20 @@
 ---
 - name: Install the selinux python module
-  yum:
+  package:
     name: libselinux-python
     state: present
   when: ansible_os_family == "RedHat"
   tags: [packages,nginx]
 
 - name: Install the epel packages
-  yum:
+  package:
     name: epel-release
     state: present
   when: nginx_is_el|bool
   tags: [packages,nginx]
 
 - name: Install the nginx packages
-  yum:
+  package:
     name: "{{ item }}"
     state: present
   with_items: "{{ nginx_redhat_pkg }}"
