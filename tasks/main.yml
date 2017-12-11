@@ -21,6 +21,13 @@
 - include: ensure-dirs.yml
   tags: [configuration, nginx]
 
+- name: Setup nginx user's groups
+  user:
+    name: "{{nginx_user}}"
+    group: "{{nginx_group}}"
+    groups: "{{nginx_groups}}"
+  tags: [nginx]
+
 - include: remove-defaults.yml
   when: not keep_only_specified
   tags: [configuration, nginx]
