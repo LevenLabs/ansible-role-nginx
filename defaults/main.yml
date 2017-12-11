@@ -49,9 +49,13 @@ nginx_sites:
     - server_name _
     - root "{{ nginx_sites_default_root }}" 
     - index index.html
+# TODO: Move default sites and configs to a wrapper role if this
+# bug is ever fixed: https://github.com/ansible/ansible/issues/22025
+nginx_default_sites: {}
 nginx_remove_sites: []
 
 nginx_configs: {}
+nginx_default_configs: {}
 nginx_snippets: {}
 nginx_stream_configs: {}
 nginx_remove_configs: []
