@@ -26,6 +26,13 @@
   when: not nginx_keep_only_specified
   tags: [configuration, nginx]
 
+- name: Setup nginx user's groups
+  user:
+    name: "{{nginx_user}}"
+    group: "{{nginx_group}}"
+    groups: "{{nginx_groups}}"
+  tags: [nginx]
+
 - include_tasks: remove-extras.yml
   when: nginx_keep_only_specified
   tags: [configuration, nginx]
