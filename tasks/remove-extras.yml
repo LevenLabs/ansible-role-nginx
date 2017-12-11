@@ -10,7 +10,7 @@
     state: absent
   with_items: "{{ enabled_sites.stdout_lines | default([]) }}"
   # 'item.conf' => 'item'
-  when: item[:-5] not in nginx_sites.keys()
+  when: item[:-5] not in nginx_sites.keys() and item[:-5] not in nginx_default_sites.keys()
   notify:
     - reload nginx
 
@@ -25,7 +25,7 @@
     state: absent
   with_items: "{{ config_files.stdout_lines | default([]) }}"
   # 'item.conf' => 'item'
-  when: item[:-5] not in nginx_configs.keys()
+  when: item[:-5] not in nginx_configs.keys() and item[:-5] not in nginx_default_configs.keys()
   notify:
     - reload nginx
 
