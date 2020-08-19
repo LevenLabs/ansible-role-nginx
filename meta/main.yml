@@ -31,4 +31,11 @@ galaxy_info:
   galaxy_tags:
     - web
 allow_duplicates: yes
-dependencies: []
+
+dependencies:
+  - role: holdingpattern
+    holdingpattern_service: nginx
+    holdingpattern_service_name: nginx
+    holdingpattern_service_addr: :80
+    holdingpattern_service_health_endpoint: http://:80/health-check
+    holdingpattern_service_first_start: False # Don't ever start yet since we have to install nginx
